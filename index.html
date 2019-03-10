@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html style="font-size: 37.5px;" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="js/html2canvas.js"></script>
+</head>
+<body>
+<div id="card-mask">
+    <div><a id="downA" class="down" href="" download="downImg"></a></div>
+    <button id="btn">download</button>
+    <div id="card-main">
+        <h1>代码虐我千百遍</h1>
+        <br>
+        <h1>我待代码如初恋</h1>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+        //id btn触发点击事件
+        $("#btn").click(function () {
+                        //将用canvas绘制的容器
+            html2canvas($("#card-main").get(0)).then(function (canvas) {
+                document.body.appendChild(canvas);
+                var url = canvas.toDataURL();//图片地址
+                var timestamp = Date.parse(new Date());
+                $("#downA").attr('href', url);
+                //下载下来的图片名字
+                $("#downA").attr('download', timestamp + '.png');
+                $("#downA").get(0).click()
+            });
+        });
+    })
+</script>
+</html>
